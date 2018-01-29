@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Index from '@/modules/Index/Index'
+import Search from '@/modules/Index/Search'
 import Home from '@/modules/Home/Home'
+import List from '@/modules/Home/List'
 import Man from '@/modules/Man/Man'
 import Maam from '@/modules/Maam/Maam'
 import Skincare from '@/modules/Skincare/Skincare'
@@ -10,6 +12,8 @@ import Furniture from '@/modules/Furniture/Furniture'
 import Baby from '@/modules/Baby/Baby'
 import Class from '@/modules/Class/Class'
 import User from '@/modules/User/User'
+import Reg from '@/modules/User/Reg.vue'
+import Login from '@/modules/User/Login.vue'
 //@ 代表 src目录
 Vue.use(Router)
 
@@ -21,9 +25,19 @@ export default new Router({
       component: Index
     },
     {
+      path: '/search',
+      name: 'Search',
+      component: Search
+    },
+    {
       path: "/home",
       name: 'home',
       component: Home
+    },
+    {
+      path: "/list",
+      name: 'List',
+      component: List
     },
     {
       path: "/man",
@@ -59,6 +73,24 @@ export default new Router({
       path: "/user",
       name: "User",
       component: User
+      // children: [
+      //   {
+      //     // path: "reg",
+      //     // name: "Reg",
+      //     // component:Reg
+      //     // path:"reg",component:()=>import("@/modules/User/Reg")
+      //   }
+      // ]
+    },
+    {
+      path: "/reg",
+          name: "Reg",
+          component: Reg
+    },
+    {
+      path: "/login",
+      name: "Longin",
+      component: Login
     },
     {
       path:"*",

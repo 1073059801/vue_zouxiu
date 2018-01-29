@@ -19,6 +19,7 @@ var home = require('./routes/home');
 var hometwo = require('./routes/hometwo');
 var list = require('./routes/list');
 var listtwo = require('./routes/listtwo');
+var detail = require('./routes/detail');
 
 var app = express();
 
@@ -62,6 +63,7 @@ app.use('/api/home',home);
 app.use('/api/hometwo',hometwo);
 app.use('/api/list',list);
 app.use('/api/listtwo',listtwo);
+app.use('/api/detail',detail);
 
 app.use('/admin', admin);
 

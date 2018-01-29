@@ -29,20 +29,20 @@
                 </p>
             </div>
             <div class="content">
-                <div class="left" v-for="item in homeData2" :key="item.img">
-                    <img :src="item.img" alt="">
+                <router-link v-for="item in homeData2" :key="item.img" :to="{name:'List',params:{str_id:item.str_id}}" class="left">
+                    <img v-lazy="item.img" alt="">
                     <div class="position">
                         <a href="#">
                             {{item.pro_name}}
                         </a>
                     </div>
-                </div>
+                </router-link>
             </div>
             <div class="swipe-wrapper">
                 <mt-swipe :auto="0">
                     <mt-swipe-item class="swipe">
                         <div class="one" v-for="items in homeData3" :key="items.pro_img">
-                            <img :src="items.pro_img" alt="">
+                            <img v-lazy="items.pro_img" alt="">
                             <p>{{items.pro_name}}</p>
                             <p>{{items.pro_name_c}}</p>
                             <p>{{items.pro_prc}}</p>
@@ -50,7 +50,7 @@
                     </mt-swipe-item>
                     <mt-swipe-item class="swipe">
                         <div class="one" v-for="items in homeData4" :key="items.pro_img">
-                            <img :src="items.pro_img" alt="">
+                            <img v-lazy="items.pro_img" alt="">
                             <p>{{items.pro_name}}</p>
                             <p>{{items.pro_name_c}}</p>
                             <p>{{items.pro_prc}}</p>
@@ -58,7 +58,7 @@
                     </mt-swipe-item>
                     <mt-swipe-item class="swipe">
                         <div class="one" v-for="items in homeData5" :key="items.pro_img">
-                            <img :src="items.pro_img" alt="">
+                            <img v-lazy="items.pro_img" alt="">
                             <p>{{items.pro_name}}</p>
                             <p>{{items.pro_name_c}}</p>
                             <p>{{items.pro_prc}}</p>
@@ -77,7 +77,7 @@
 
             <div class="content">
                  <div class="left" v-for="sale in sale2" :key="sale.img">
-                    <img :src="sale.img" alt="">
+                    <img v-lazy="sale.img" alt="">
                      <div class="position">
                         <a href="#">
                             {{sale.pro_name}}
@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="img" v-for="sale3 in sale3" :key="sale3.img">
-                <img :src="sale3.img" alt="">
+                <img v-lazy="sale3.img" alt="">
                 <div class="position">
                     <a href="#">
                         <b>{{sale3.pro_name}}</b>
@@ -96,7 +96,7 @@
             </div>
             <ul class="kind">
                 <li v-for="sale4 in sale4" :key="sale4.img">
-                    <img :src="sale4.img" alt="">
+                    <img v-lazy="sale4.img" alt="">
                     <div class="position">
                         {{sale4.pro_name}}
                     </div>
@@ -113,7 +113,7 @@
 
             <div class="content">
                  <div class="left" v-for="sale in screen2" :key="sale.img">
-                    <img :src="sale.img" alt="">
+                    <img v-lazy="sale.img" alt="">
                      <div class="position">
                         <a href="#">
                             {{sale.pro_name}}
@@ -123,14 +123,14 @@
             </div>
             <ul class="kind">
                 <li v-for="sale4 in screen3" :key="sale4.img">
-                    <img :src="sale4.img" alt="">
+                    <img v-lazy="sale4.img" alt="">
                     <div class="position">
                         {{sale4.pro_name}}
                     </div>
                 </li>
             </ul>
             <div class="img" v-for="sale3 in screen4" :key="sale3.img">
-                <img :src="sale3.img" alt="">
+                <img v-lazy="sale3.img" alt="">
             </div>
             
         </div><!--screen-->
@@ -144,7 +144,7 @@
 
             <div class="content">
                 <div class="top" v-for="mama in mama2" :key="mama.img">
-                    <img :src="mama.img" alt="">
+                    <img v-lazy="mama.img" alt="">
                     <div class="position">
                         <a href="#">
                             <b>{{mama.pro_name_c}} </b>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
                  <div class="left" v-for="mama in mama3" :key="mama.img">
-                    <img :src="mama.img" alt="">
+                    <img v-lazy="mama.img" alt="">
                      <div class="position">
                         <a href="#">
                            <p>{{mama.pro_name}}</p> 
@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="img" v-for="sale3 in mama4" :key="sale3.img">
-                <img :src="sale3.img" alt="">
+                <img v-lazy="sale3.img" alt="">
                 <div class="position">
                     <a href="#">
                         <b>{{sale3.pro_name}}</b>
@@ -183,7 +183,7 @@ import { mapGetters,mapActions } from 'vuex'
 export default {
   data(){
       return{
-
+          str_id:''
       }
   },
   computed:{

@@ -1,9 +1,8 @@
 
-import { mapActions } from '../../../node_modules/_vuex@3.0.1@vuex';
+
 <template>
    <div class="baby" id="container">
        <lh-header>
-
            <a href="javascript:window.history.go(-1);" slot="left" class="iconfont icon-zuo"></a>
            <!-- a href="javascript:window.history.go(-1);" -->
            <div slot="content" id="header_content">
@@ -28,7 +27,7 @@ import { mapActions } from '../../../node_modules/_vuex@3.0.1@vuex';
                         <mt-index-section v-for="ele in classData" :index="ele.name" :key="ele.LogoId">
                             <div class="logo">
                                 <div class="img" v-for="el in ele.children" :title="el">
-                                    <img :src="el.brandImg" alt="" >
+                                    <img v-lazy="el.brandImg" alt="" >
                                     <p>{{el.enName}}</p>
                                 </div>
                             </div>
@@ -71,8 +70,7 @@ export default {
     .header{
         background: #fff;
         border-bottom: 1px solid #d8d8d8;
-        background: #fafafa
-      
+        background: #fafafa;
     }
     a{
         color: #000;
@@ -116,13 +114,9 @@ export default {
                         height: 40px;
                          border: 1px solid #000;
                     }
-                    p{
-                        
-                    }
                 }
             }
         }
-        
     }
 }
 
