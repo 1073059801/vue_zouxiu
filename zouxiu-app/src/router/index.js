@@ -14,6 +14,8 @@ import Class from '@/modules/Class/Class'
 import User from '@/modules/User/User'
 import Reg from '@/modules/User/Reg.vue'
 import Login from '@/modules/User/Login.vue'
+import Detail from '@/modules/Detail/Detail.vue'
+import Cart from '@/modules/Cart/Cart.vue'
 //@ 代表 src目录
 Vue.use(Router)
 
@@ -38,6 +40,16 @@ export default new Router({
       path: "/list",
       name: 'List',
       component: List
+    },
+    {
+      path: "/deta:id",
+      name: 'Detail',
+      component: Detail
+    },
+    {
+      path: '/cart',
+      name: 'Cart',
+      component: Cart
     },
     {
       path: "/man",

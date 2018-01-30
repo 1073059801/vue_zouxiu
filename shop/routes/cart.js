@@ -29,13 +29,12 @@ router.get('/getListData', function(req, res, next) {
 //添加
 router.get('/add', function(req, res, next) {
   //需要 uid
-  console.log(req.session)
+  console.log(req.query)
   
   if(req.session.user||req.query.uid){ //通过两种方式识别用户身份 session/ 主动传递uid (token在计算机身份认证中是令牌（临时）的意思)
      var uid =  req.query.uid || req.session.user.uid
      var pid = req.query.pid
      myCart.add({pid,uid},function(err){
-       
         if(!err){
            res.send({msgCode:1})
         }else{
@@ -43,7 +42,6 @@ router.get('/add', function(req, res, next) {
            res.send({msgCode:2})
         }
      })
-    
   }else{
      res.send({msgCode:0})
   }

@@ -74,8 +74,9 @@ export default {
                 Toast('密码错误');
             }else if(data.data.msgCode == "1"){
                 Toast('登陆成功');
-                // localStorage.username = JSON.stringify(data2)
-                localStorage.setItem("username",data2.username)
+                localStorage.userinfo = JSON.stringify(data.data.userInfo)
+                //localStorage.setItem("userinfo",data.data.userInfo)
+                console.log(data,2325464576576867)
                 setTimeout(() => {
                     this.$router.push("/") 
                 },2000)

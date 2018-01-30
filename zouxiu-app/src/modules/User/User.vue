@@ -89,7 +89,7 @@ export default {
         })
     },
     logout(){
-        localStorage.removeItem("username");
+        localStorage.removeItem("userinfo");
         this.$router.push("/login")
     },
     getPhoto(){
@@ -100,10 +100,10 @@ export default {
     }
   },
   mounted(){
-    if(localStorage.username){
+    if(localStorage.userinfo){
         this.isLogin = true;
-        // this.username = JSON.parse(localStorage.username).username
-        this.username = localStorage.getItem("username")
+         this.username = JSON.parse(localStorage.userinfo).username
+       // this.username = localStorage.getItem("userinfo").username
         console.log(this.username)
 	}
   }

@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 
 import axios from 'axios'
+import qs from 'qs'
 
 import lhHeader from '@/components/Header'
 import lhContent from '@/components/Content'

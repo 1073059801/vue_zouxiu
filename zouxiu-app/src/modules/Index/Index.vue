@@ -78,10 +78,10 @@ import { mapGetters,mapActions } from 'vuex'
         //发起 获取服务器数据的 action
         // this.$store.dispatch("getCityData")
         this.getlistData()
-        if(localStorage.username){
+        if(localStorage.userinfo){
             this.isLogin = true;
-            // this.username = JSON.parse(localStorage.username).username
-            this.username = localStorage.getItem("username")
+            this.username = JSON.parse(localStorage.userinfo).username
+            //this.username = localStorage.getItem("username")
             console.log(this.username)
         }
         

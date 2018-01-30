@@ -13,17 +13,28 @@
                
                 <mt-tab-container-item id="1">
                     <ul>
-                        <li v-for="ele in listData">
-                            <img src="../../assets/logo.png" alt="">
-                            <p>00000000</p>
-                            <p>hhahahha哈哈哈哈</p>
-                            <p>￥50</p>
+                        <li v-for="ele in listData" :key="ele.goodsName">
+                            <router-link :to="{name:'Detail',params:{id:ele.str_id}}" >
+                                <img :src="ele.goodsImg"  alt="">
+                                <p>{{ele.brandEnName}}</p>
+                                <p>{{ele.goodsName}}</p>
+                                <p>￥{{ele.price}}</p>
+                            </router-link>
                         </li>
                     </ul>
                     <!-- <mt-cell v-for="n in 10" :title="'内容 ' + n" /> -->
                 </mt-tab-container-item>
                 <mt-tab-container-item id="2">
-                    <mt-cell v-for="n in 4" :title="'测试 ' + n" />
+                     <ul>
+                        <li v-for="ele in listData" :key="ele.goodsName">
+                             <router-link :to="{name:'Detail',params:{id:ele.str_id}}" >
+                                <img :src="ele.goodsImg"  alt="">
+                                <p>{{ele.brandEnName}}</p>
+                                <p>{{ele.goodsName}}</p>
+                                <p>￥{{ele.price}}</p>
+                            </router-link>
+                        </li>
+                    </ul>
                 </mt-tab-container-item>
             </mt-tab-container>
         </div>
@@ -49,10 +60,10 @@ export default {
       this.axios.get("http://localhost:8000/api/list/getListData").then(res => {
           if( id == 1 ){
               console.log(res.data[0]) 
-              this.listData = res.data[0]
+              this.listData = res.data[0].content
           }else{
               console.log(res.data[1])
-              this.listData = res.data[1]              
+              this.listData = res.data[1].content              
           }
            
       })
@@ -71,6 +82,7 @@ export default {
         }
         
         .mint-tab-item.is-selected{
+            color: red;
             border-bottom: 2px solid red;
         }
     }
@@ -90,6 +102,11 @@ export default {
                 img{
                     width: 100%;
                     height: 70%;
+                }
+                p{
+                    overflow: hidden;
+                    text-overflow:ellipsis;
+                    white-space: nowrap;
                 }
             }
         }
