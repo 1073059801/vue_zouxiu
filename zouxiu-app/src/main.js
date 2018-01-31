@@ -4,15 +4,27 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+// import ElementUI from 'element-ui'
+// import 'element-ui/lib/theme-chalk/index.css'
+
+
+// Vue.use(ElementUI)
+
 import axios from 'axios'
 import qs from 'qs'
 
 import lhHeader from '@/components/Header'
 import lhContent from '@/components/Content'
 import VueJsonp from 'vue-jsonp'
-import { Swipe, SwipeItem, TabItem, Navbar, Toast, Lazyload} from 'mint-ui';
 
 
+import { Swipe, SwipeItem, TabItem, Navbar, Toast, Lazyload, MessageBox} from 'mint-ui';
+
+
+// import InputNumber from 'element-ui'
+// // import Element from 'element-ui'
+// // Vue.use(Element, { size: 'small' })
+// Vue.use(InputNumber)
 
 import store from "./store"
 import MintUI from 'mint-ui'
@@ -34,7 +46,7 @@ Vue.component(Navbar.name, Navbar);
 Vue.component(TabItem.name, TabItem);
 
 
-//axios
+//axios 
 Vue.prototype.axios = axios
 Vue.config.productionTip = false
 

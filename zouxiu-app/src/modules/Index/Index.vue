@@ -84,7 +84,6 @@ import { mapGetters,mapActions } from 'vuex'
             //this.username = localStorage.getItem("username")
             console.log(this.username)
         }
-        
     }
   }
 </script>

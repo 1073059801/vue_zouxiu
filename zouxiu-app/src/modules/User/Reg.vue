@@ -71,7 +71,7 @@ export default {
             }else if(data.data.msgCode == "1"){
                 Toast('注册成功');
                 setTimeout(() => {
-                    this.$router.push("user") 
+                    this.$router.push("/login") 
                 },2000)
                  //页面 跳转  无道理  不懂
             }

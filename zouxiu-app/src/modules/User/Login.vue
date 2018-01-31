@@ -76,7 +76,6 @@ export default {
                 Toast('登陆成功');
                 localStorage.userinfo = JSON.stringify(data.data.userInfo)
                 //localStorage.setItem("userinfo",data.data.userInfo)
-                console.log(data,2325464576576867)
                 setTimeout(() => {
                     this.$router.push("/") 
                 },2000)

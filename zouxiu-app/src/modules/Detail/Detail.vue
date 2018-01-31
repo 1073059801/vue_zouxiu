@@ -117,7 +117,8 @@ export default {
           detailData:[],
           bannerData:[],
           detail_img:[],
-          selected:"1"
+          selected:"1",
+          uid: ''
       }
   },
   methods:{
@@ -147,18 +148,16 @@ export default {
         event.target.style.height = '100px'
       },
       addCart(){
-          var uid = JSON.parse(localStorage.userinfo).uid
-        //   var uid = localStorage.userinfo("uid");
-          var id = this.$route.params.id;
-            console.log(id)  //获取商品信息
-          var carturl = "http://localhost:8000/api/cart/add";
-          carturl += "?uid=" + uid + "&pid=" + id + "&number=1"  
-          if( uid ){          
+          if(localStorage.getItem("userinfo")){
+            var uid = JSON.parse(localStorage.userinfo).uid
+            var id = this.$route.params.id;   //获取商品信息id
+            var carturl = "http://localhost:8000/api/cart/add";
+            carturl += "?uid=" + uid + "&pid=" + id + "&number=1"  
             this.axios.get(carturl).then(res => {
                 console.log(res)  
                 if( res.data.msgCode == 1 ){
                     Toast("加入购物车成功")
-                }else{
+                }else{  
                     Toast("GG") 
                 }
             })
@@ -168,7 +167,6 @@ export default {
                 this.$router.push("/login")
                },1000) 
           }
-          
       }
   },
   mounted(){
