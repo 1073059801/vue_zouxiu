@@ -20,6 +20,9 @@ var hometwo = require('./routes/hometwo');
 var list = require('./routes/list');
 var listtwo = require('./routes/listtwo');
 var detail = require('./routes/detail');
+var form = require('./routes/form');
+var goods = require('./routes/goods');
+
 
 var app = express();
 
@@ -51,7 +54,7 @@ app.use(session({
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api/categroy', category);
+app.use('/api/category', category);
 app.use('/api/product', product);
 app.use('/api/cart', cart);
 app.use('/api/user', user);
@@ -64,6 +67,8 @@ app.use('/api/hometwo',hometwo);
 app.use('/api/list',list);
 app.use('/api/listtwo',listtwo);
 app.use('/api/detail',detail);
+app.use('/api', form);
+app.use('/api/goods',goods);
 
 app.use('/admin', admin);
 

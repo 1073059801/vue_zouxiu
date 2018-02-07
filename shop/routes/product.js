@@ -27,6 +27,33 @@ router.get('/getDetailData', function(req, res, next) {
   
 });
 
+router.post('/add',function(req,res,next){
+	myPro.add(req.body,function(err){
+		res.send({
+			msgCode:err?2:1,
+			err
+		})
+	})
+});
+
+router.all('/editor', function(req, res, next) {
+  myPro.editor(req.body.pid?req.body:req.query,function(err){
+    res.send({
+      msgCode:err?2:1,
+      err
+    })
+  })
+});
+
+router.post('/del',function(req,res,next){
+	myPro.del(req.body,function(err){
+		res.send({
+			msgCode:err?2:1,
+			err
+		})
+	})
+});
+
 //首页商品
 router.get('/getHomeData', function(req, res, next) {
   var listData = [

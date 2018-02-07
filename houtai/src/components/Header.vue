@@ -1,0 +1,54 @@
+<template>
+  <div class="">
+    <a href="#/" class="logo">
+    	<img src="../assets/logo.png" />
+    	<span>走秀后台管理系统</span>
+    </a>
+
+    <div class="header-right">
+      <el-dropdown trigger="click">
+        <span class="el-dropdown-link">
+        	<img class="pic" src="../assets/touxiang.png" />
+          <span>望尘莫及</span>
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>修改信息</el-dropdown-item>
+          <el-dropdown-item>消息</el-dropdown-item>
+          <el-dropdown-item>设置</el-dropdown-item>
+          <el-dropdown-item>注销</el-dropdown-item>
+        
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'Header',
+  data () {
+    return {
+      msg: 'Welcome to Your Vue.js App'
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.logo { color: #fff; height: 100%; float: left; line-height: 60px;font-size: 30px; padding: 0 50px;text-decoration:none;font-family:"微软雅黑";}
+.logo img{
+	width:60px;
+	vertical-align:middle;
+}
+.header-right { float: right;height: 100%;}
+.el-dropdown-link { color: #fff; display: block}
+.pic { height: 40px; width: 40px; border-radius: 50%; margin: 5px;}
+.el-dropdown-link .pic, .el-dropdown-link span, .el-dropdown-link i { float: left; line-height: 60px;}
+.logo span{
+	font-size:32px;
+	color:skyblue;
+	letter-spacing:1px;
+}
+</style>

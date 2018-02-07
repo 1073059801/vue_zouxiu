@@ -30,9 +30,16 @@ class Order{
         async.waterfall([
             (cb)=> pool.getConnection(cb), //1、先获取连接
             (conn,cb)=> { //2、拿到连接 通过state进行查询
-                var sqlStr =   "select * from `order` where uid="+ uid
-                if(state){
-                    var sqlStr =sqlStr+ ` and state=${state}`
+                var sqlStr =   "select * from `order` ";
+                if(uid){
+                	 var sqlStr =   "select * from `order` where uid="+ uid
+	                if(state){
+	                    var sqlStr =sqlStr+ ` and state=${state}`
+	                }
+                }else{
+                	if(state){
+	                    var sqlStr =sqlStr+ ` where state=${state}`
+	                }
                 }
                 conn.query(sqlStr,(err,orderData)=>{
                     cb(err,conn,orderData) //订单查询成功，调用回调
@@ -46,7 +53,7 @@ class Order{
                     var pidsArr = order.order_pids.split(",");
 
                     //数据库部分 查询商品数据
-                    var sqlStr = "select p_name,img_url,price from product where"
+                    var sqlStr = "select goodsName,img_url,pid,price from goods where"
                     pidsArr.forEach((id,index)=>{
                         sqlStr+=(index?" or ":" ")+"pid="+id
                     })

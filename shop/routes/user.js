@@ -4,10 +4,6 @@ var User = require("../models/user");
 var myUser = new User()
 /* GET product api. */
 
-router.options('/reg', function(req, res, next) {
-  //  req.body  前端post方式传递的数据
-  res.send("post")
-})
 
 //注册提交
 router.post('/reg', function(req, res, next) {

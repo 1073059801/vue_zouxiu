@@ -15,8 +15,8 @@
                     <ul>
                         <li v-for="ele in listData" :key="ele.goodsName">
                             <router-link :to="{name:'Detail',params:{id:ele.str_id}}" >
-                                <img :src="ele.goodsImg"  alt="">
-                                <p>{{ele.brandEnName}}</p>
+                                <img :src="ele.img_url"  alt="">
+                                <p>{{ele.discount}}</p>
                                 <p>{{ele.goodsName}}</p>
                                 <p>￥{{ele.price}}</p>
                             </router-link>
@@ -28,8 +28,8 @@
                      <ul>
                         <li v-for="ele in listData" :key="ele.goodsName">
                              <router-link :to="{name:'Detail',params:{id:ele.str_id}}" >
-                                <img :src="ele.goodsImg"  alt="">
-                                <p>{{ele.brandEnName}}</p>
+                                <img :src="ele.img_url"  alt="">
+                                <p>{{ele.discount}}</p>
                                 <p>{{ele.goodsName}}</p>
                                 <p>￥{{ele.price}}</p>
                             </router-link>
@@ -50,23 +50,41 @@ export default {
   data(){
       return{
           str_id: '',
-          listData: '',
-          selected:"1"
+          listData: [],
+          selected:"1",
+          goodsData:[]
+      }
+  },
+  methods:{
+      getgoodsData(){
+           var id = this.$route.params.str_id || 2;
+           console.log(id)
+          this.axios.get("http://localhost:8000/api/product/getListData").then(res => {
+               console.log(res.data.listData)
+               if( id == 1 ){
+                   this.listData = res.data.listData.splice(0,8)
+                   console.log(this.goodsData)
+               }else if( id == 2 ){
+                    this.listData = res.data.listData.splice(8,12)
+                   console.log( this.goodsData)
+               }
+          })
       }
   },
   mounted(){
       var id = this.$route.params.str_id;
-      console.log(id)
-      this.axios.get("http://localhost:8000/api/list/getListData").then(res => {
-          if( id == 1 ){
-              console.log(res.data[0]) 
-              this.listData = res.data[0].content
-          }else{
-              console.log(res.data[1])
-              this.listData = res.data[1].content              
-          }
+    //   console.log(id)
+    //   this.axios.get("http://localhost:8000/api/list/getListData").then(res => {
+    //       if( id == 1 ){
+    //           console.log(res.data[0]) 
+    //           this.listData = res.data[0].content
+    //       }else{
+    //           console.log(res.data[1])
+    //           this.listData = res.data[1].content              
+    //       }
            
-      })
+    //   })
+      this.getgoodsData()
   }
 }
 </script>
@@ -96,12 +114,14 @@ export default {
             flex-wrap: wrap;
             li{
                 width: 50%;
+                height: 315px;
                 // background: red;
                 text-align:left;    
                 padding: 0 5px;
+                // padding-bottom:10px; 
                 img{
                     width: 100%;
-                    height: 70%;
+                    height: 75%;
                 }
                 p{
                     overflow: hidden;

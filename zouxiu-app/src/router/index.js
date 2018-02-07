@@ -16,6 +16,8 @@ import Reg from '@/modules/User/Reg.vue'
 import Login from '@/modules/User/Login.vue'
 import Detail from '@/modules/Detail/Detail.vue'
 import Cart from '@/modules/Cart/Cart.vue'
+import Sett from '@/modules/Cart/Sett.vue'
+import Address from '@/modules/Cart/Address.vue'
 //@ 代表 src目录
 Vue.use(Router)
 
@@ -24,17 +26,40 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
-    },
-    {
-      path: '/search',
-      name: 'Search',
-      component: Search
+      component: Index,
+      children:[
+       
+      ]
     },
     {
       path: "/home",
       name: 'home',
       component: Home
+    },
+    {
+      path: "/man",
+      name: "Man",
+      component: Man
+    },
+    {
+      path: "/baby",
+      name: "Baby",
+      component: Baby
+    },
+    {
+      path: "/skin",
+      name:"Skincare",
+      component: Skincare
+    },
+    {
+      path: "/maam",
+      name: "Maam",
+      component: Maam
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search
     },
     {
       path: "/list",
@@ -52,30 +77,23 @@ export default new Router({
       component: Cart
     },
     {
-      path: "/man",
-      name: "Man",
-      component: Man
+      path: '/sett',
+      name: 'Sett',
+      component: Sett
     },
     {
-      path: "/maam",
-      name: "Maam",
-      component: Maam
+      path: '/address',
+      name: 'Address',
+      component: Address
     },
-    {
-      path: "/skin",
-      name:"Skincare",
-      component: Skincare
-    },
+
+
     {
       path: "/furn",
       name: "Furniture",
       component: Furniture
     },
-    {
-      path: "/baby",
-      name: "Baby",
-      component: Baby
-    },
+ 
     {
       path: "/class",
       name: "Class",
@@ -84,20 +102,15 @@ export default new Router({
     {
       path: "/user",
       name: "User",
-      component: User
-      // children: [
-      //   {
-      //     // path: "reg",
-      //     // name: "Reg",
-      //     // component:Reg
-      //     // path:"reg",component:()=>import("@/modules/User/Reg")
-      //   }
-      // ]
+      component: User,
+      children:[
+        
+      ]
     },
     {
       path: "/reg",
-          name: "Reg",
-          component: Reg
+      name: "Reg",
+      component: Reg
     },
     {
       path: "/login",

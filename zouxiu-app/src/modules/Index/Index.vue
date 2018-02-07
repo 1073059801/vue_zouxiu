@@ -1,6 +1,6 @@
 <template>
   <div class="home" id="container">
-      <lh-content>
+      <div id="content">
           <div class="header">
             <div class="left">
                 <img src="../../assets/logo_new.png" alt="">
@@ -41,9 +41,8 @@
                 <p>© 2018 走秀网</p>
             </div>
         </div>
-      </lh-content>    
-
-      <div class="ReturnTop">
+      </div>    
+      <div class="ReturnTop" @click="rettop()">
           <i class="iconfont icon-top-1-copy"></i>
       </div>
   </div>
@@ -51,6 +50,7 @@
 
 <script>
 import { mapGetters,mapActions } from 'vuex'
+import $ from 'jquery'
 
   export default {
     name: 'search',
@@ -72,7 +72,10 @@ import { mapGetters,mapActions } from 'vuex'
       ]),
       focus(){
           this.$router.push("/search")
-      }
+      },
+        rettop(){ //返回顶部
+            $("#content").animate({"scrollTop":0},500)
+        }
     },
     mounted(){
         //发起 获取服务器数据的 action
@@ -84,6 +87,13 @@ import { mapGetters,mapActions } from 'vuex'
             //this.username = localStorage.getItem("username")
             console.log(this.username)
         }
+        $("#content").scroll(function(){
+            if($("#content").scrollTop()>100){
+                $(".ReturnTop").css("display","block")
+            }else{
+                $(".ReturnTop").css("display","none")
+            }
+        })
     }
   }
 </script>
@@ -136,7 +146,7 @@ import { mapGetters,mapActions } from 'vuex'
             }
         }
     }
-    .content{
+    #content{
         overflow-x: auto;
         ul{
             width: 100%;

@@ -11,7 +11,9 @@
                </mt-navbar>
            </div>
            <i slot="right" class="right">
-               <router-link to="/cart" class="iconfont icon-gouwuche"></router-link>
+               <router-link to="/cart" class="iconfont icon-gouwuche">
+                    <mt-badge class="num" size="small">{{number}}</mt-badge>
+               </router-link>
                <i class="iconfont icon-msnui-more"></i>
            </i>
        </lh-header>
@@ -29,7 +31,7 @@
                 <div class="contetn">
                     <p>{{detailData.brandName}}</p>
                     <p>{{detailData.goodsName}}</p>
-                    <b>￥{{detailData.price}}</b>
+                    <b>￥{{detailData.price}}   <span>￥{{detailData.or_price}}</span> </b>
                     <p style="color:#999;">发货地：{{detailData.address}}</p>
                     <div class="Model">
                         <div class="color">
@@ -110,7 +112,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { Toast } from 'mint-ui';
 import qs from 'qs'
-
+import { Indicator } from 'mint-ui';
 export default {
   data(){
       return{
@@ -118,17 +120,18 @@ export default {
           bannerData:[],
           detail_img:[],
           selected:"1",
-          uid: ''
+          uid: '',
+          numData: [],
+          number: ''
       }
   },
   methods:{
       getDetailData(){
         var id = this.$route.params.id;
-        console.log(id)
+        // console.log(id)
         this.axios.get("http://localhost:8000/api/detail/getDetailData").then(res => {
             // console.log(res)
-              if( id == 1 ){
-                //   console.log(res.data[0]) 
+              if( id == 1 ){                  
                   this.detailData = res.data[0]
                   this.bannerData = eval(res.data[0].content_img)   
                   this.detail_img = eval(res.data[0].detail_img)   
@@ -138,16 +141,17 @@ export default {
                    this.bannerData = eval(res.data[1].content_img)   
                   this.detail_img = eval(res.data[1].detail_img)           
             }
+            // console.log(res.data) 
         })
       },
-      basic(event){
+      basic(event){  //失败 
        
         var box = document.getElementsByClassName("basic_1")
         console.log(box)
         // box.target.style.bannerData = "red"
         event.target.style.height = '100px'
       },
-      addCart(){
+      addCart(){ //加入购物车
           if(localStorage.getItem("userinfo")){
             var uid = JSON.parse(localStorage.userinfo).uid
             var id = this.$route.params.id;   //获取商品信息id
@@ -156,7 +160,19 @@ export default {
             this.axios.get(carturl).then(res => {
                 console.log(res)  
                 if( res.data.msgCode == 1 ){
-                    Toast("加入购物车成功")
+                    // Toast("加入购物车成功")
+                    Indicator.open({
+                        text: '正在加入..',
+                        spinnerType: 'fading-circle'
+                    })
+                     setTimeout(() => {
+                        Indicator.close();
+                        this.num()
+                    },1000)
+                        //  Indicator.close();
+                          
+
+                    
                 }else{  
                     Toast("GG") 
                 }
@@ -167,11 +183,26 @@ export default {
                 this.$router.push("/login")
                },1000) 
           }
-      }
+      },
+      num(){
+        var num = 0;
+        var uid = JSON.parse(localStorage.userinfo).uid
+        var carturl = "http://localhost:8000/api/cart/getListData";
+        carturl += "?uid=" + uid  
+        this.axios.get(carturl).then(res =>{
+            console.log(res.data.cartData)
+            this.numData = res.data.cartData
+            for( var ele of this.numData ){
+                num += ele.number
+                this.number = num
+                console.log(this.number)
+            }
+        })
+    }
   },
   mounted(){
-
      this.getDetailData()
+     this.num()
   }
 }
 </script>
@@ -190,6 +221,13 @@ export default {
             display: flex;
             justify-content: space-around;
             width: 80px;
+            position: relative;
+            .num{
+                    position: absolute;
+                    top: 6px;right: 37px;
+                    background: red;
+                    line-height: 15px;
+                }
             .iconfont{
                 font-size: 20px;
             }
@@ -213,7 +251,7 @@ export default {
         background: #ededf3;
         p{
             background: #fff;
-            padding: 5px 10px;
+            padding: 5px 10px;text-align: left;
         }
         b{
             padding: 5px 10px;
@@ -221,6 +259,13 @@ export default {
             display: block;
             border-bottom: 2px solid #d8d8d8;
             background: #fff;
+            text-align: left;
+            span{
+                font-size: 15px;
+                color: #999;
+                text-decoration: line-through;
+                margin-left: 30px;
+            }
         }
         .Model{
                 background: #ffffff;

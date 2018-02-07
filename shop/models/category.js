@@ -6,16 +6,16 @@ class ClassModel{
     getListData(callback){
         pool.getConnection(function(err,connection){
             if(err) throw err;
-            connection.query("select * from category",function(err,results){
-                 if(err) throw err;
+            connection.query("select * from kindRight",function(err,results){
+                
                 var data = [];
                 results.forEach(ele=>{
-                    if(!ele.parent_id){
+                    if(!ele.proId){
                         ele.children = [];
                         data.push(ele)
                     }else {
-                        data.forEach((cate,index)=>{
-                            if(cate.catalogId==ele.parent_id){
+                        data.forEach((el,index)=>{
+                            if(el.LogoId==ele.proId){
                                 data[index].children.push(ele)
                             }
                         })
@@ -30,14 +30,27 @@ class ClassModel{
      getCateData(params,callback){
         pool.getConnection(function(err,connection){
             if(err) throw err;
-            var parent_id = params.parent_id ||0 
-            connection.query("select * from category where parent_id="+parent_id,function(err,results){
+            var proId = params.proId ||0 
+            connection.query("select * from kindRight where proId="+proId,function(err,results){
                 callback(results)
                 //释放连接
                 connection.release()    
             })
         })
     }
+    add({name,proId=0,brandImg=""},callback){
+        pool.getConnection(function(err,connection){
+            if(err) throw err;
+            proId = proId ||0 
+            console.log(`insert into kindRight(name,proId,brandImg) values('${name}',${proId},${brandImg}) `)
+            connection.query(`insert into kindRight(name,proId,brandImg) values('${name}',${proId},'${brandImg}') `,function(err){
+                callback(err)
+                //释放连接
+                connection.release()    
+            })
+        })
+    }
+   
 }
 
 module.exports = ClassModel
